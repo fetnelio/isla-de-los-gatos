@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Isla de los Gatos</title>
+<meta name="description" content="Videos cortos que resuelven puzzles de lógica explicando el razonamiento paso a paso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg1: #16213B; --bg2: #24345A; --card: #1D2B4A; --ink: #FFFFFF;
+    --muted: #AFC0E0; --accent: #FFD36E; --line: #2E4170;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); font-family: Nunito, system-ui, sans-serif;
+    background: radial-gradient(ellipse at 50% 0%, var(--bg2), var(--bg1) 60%) fixed, var(--bg1);
+    line-height: 1.5;
+  }
+  main { max-width: 1080px; margin: 0 auto; padding: 48px 16px 80px; }
+  header { text-align: center; margin-bottom: 40px; }
+  .marca { letter-spacing: .35em; color: var(--muted); font-weight: 800; font-size: 14px; }
+  h1 { font-size: clamp(36px, 7vw, 64px); font-weight: 900; margin: 8px 0 12px; line-height: 1.05; }
+  .bajada { color: var(--muted); font-size: 19px; max-width: 640px; margin: 0 auto; }
+  h2 { font-size: 28px; font-weight: 900; margin: 64px 0 8px; }
+  h2 + p { color: var(--muted); margin-top: 0; }
+  .videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .ep { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 14px; }
+  .ep video { width: 100%; aspect-ratio: 9 / 16; border-radius: 12px; background: #0B1020; display: block; }
+  .ep h3 { margin: 12px 4px 2px; font-size: 18px; }
+  .ep p { margin: 0 4px; color: var(--muted); font-size: 15px; }
+  .estrellas { color: var(--accent); letter-spacing: 2px; }
+  .reglas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 0; list-style: none; }
+  .reglas li { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; font-weight: 800; }
+  .tactica { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin: 16px 0; }
+  .tactica h3 { margin: 0 0 4px; font-size: 20px; }
+  .tactica h3 span { display: inline-block; min-width: 30px; height: 30px; line-height: 30px; text-align: center;
+    border-radius: 15px; background: var(--accent); color: #2A2340; margin-right: 10px; font-size: 16px; }
+  .tactica p { margin: 4px 0 12px; color: var(--muted); }
+  .tactica img { width: 100%; max-width: 720px; border-radius: 12px; display: block; }
+  .cierre { text-align: center; margin-top: 64px; font-size: 22px; font-weight: 900; }
+  .cierre small { display: block; color: var(--muted); font-weight: 600; font-size: 16px; margin-top: 8px; }
+  a { color: var(--accent); }
+  footer { text-align: center; color: var(--muted); margin-top: 40px; font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="marca">LA ISLA DE LOS GATOS</div>
+    <h1>¿Dónde va cada gato?</h1>
+    <p class="bajada">Videos cortos que resuelven puzzles de lógica explicando el razonamiento, paso a paso.
+      Tableros generados por computadora, resueltos con tácticas humanas.</p>
+  </header>
+
+  <section class="videos">
+    <div class="ep" id="ep1">
+      <video src="videos/ep1.mp4" controls playsinline preload="metadata" poster="episodios/ep1.gif"></video>
+      <h3>Episodio 1 <span class="estrellas">★★</span></h3>
+      <p>7×7 · Encierro en una línea</p>
+    </div>
+    <div class="ep" id="ep2">
+      <video src="videos/ep2.mp4" controls playsinline preload="metadata" poster="episodios/ep2.gif"></video>
+      <h3>Episodio 2 <span class="estrellas">★★★★</span></h3>
+      <p>8×8 · Ataque común y encierro doble</p>
+    </div>
+    <div class="ep" id="ep3">
+      <video src="videos/ep3.mp4" controls playsinline preload="metadata" poster="episodios/ep3.gif"></video>
+      <h3>Episodio 3 <span class="estrellas">★★★★★</span></h3>
+      <p>9×9 · Contradicción</p>
+    </div>
+  </section>
+
+  <h2>Las reglas</h2>
+  <p>Variante de una estrella del Star Battle, también conocida como Queens.</p>
+  <ul class="reglas">
+    <li>Un gato por fila</li>
+    <li>Un gato por columna</li>
+    <li>Un gato por isla</li>
+    <li>Los gatos no se tocan, ni en diagonal</li>
+  </ul>
+
+  <h2>La escalera de tácticas</h2>
+  <p>Cada imagen sale de un paso real del solver. Contorno amarillo: el grupo que se analiza. Anillos: sus lugares libres. Borde rojo: lo que se tacha.</p>
+
+  <div class="tactica"><h3><span>1</span>Único lugar</h3>
+    <p>A una isla, fila o columna le queda una sola casilla libre: ahí va el gato.</p>
+    <img src="tacticas/nivel1.png" alt="Ejemplo de único lugar" loading="lazy"></div>
+  <div class="tactica"><h3><span>2</span>Encierro en una línea</h3>
+    <p>Los lugares libres de una isla caen en una misma fila o columna: esa línea es suya y el resto se tacha.</p>
+    <img src="tacticas/nivel2.png" alt="Ejemplo de encierro en una línea" loading="lazy"></div>
+  <div class="tactica"><h3><span>3</span>Ataque común</h3>
+    <p>Si todas las casillas libres de un grupo atacan a una misma casilla, esa casilla se tacha.</p>
+    <img src="tacticas/nivel3.png" alt="Ejemplo de ataque común" loading="lazy"></div>
+  <div class="tactica"><h3><span>4</span>Encierro doble</h3>
+    <p>Dos grupos que solo caben en dos líneas: esas líneas son suyas.</p>
+    <img src="tacticas/nivel4.png" alt="Ejemplo de encierro doble" loading="lazy"></div>
+  <div class="tactica"><h3><span>5</span>Encierro múltiple</h3>
+    <p>Lo mismo con tres o más grupos. Fácil de enunciar, difícil de ver.</p>
+    <img src="tacticas/nivel5.png" alt="Ejemplo de encierro múltiple" loading="lazy"></div>
+  <div class="tactica"><h3><span>6</span>¿Y si...? (contradicción)</h3>
+    <p>Suponé un gato: se fuerza otro, y una isla se queda sin lugar. ¡Imposible! Esa casilla se tacha.</p>
+    <img src="tacticas/nivel6.png" alt="Ejemplo de contradicción" loading="lazy"></div>
+  <div class="tactica"><h3><span>7</span>Contradicción larga</h3>
+    <p>Igual, pero para llegar al absurdo hacen falta las tácticas 1 a 5 dentro de la suposición.</p>
+    <img src="tacticas/nivel7.png" alt="Ejemplo de contradicción larga" loading="lazy"></div>
+
+  <p class="cierre">Cada gato en su isla... y cada isla con su gato.
+    <small>Michi, michi, miau.</small></p>
+
+  <footer><a href="https://github.com/fetnelio/isla-de-los-gatos">Código en GitHub</a></footer>
+</main>
+</body>
+</html>

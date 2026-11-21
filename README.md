@@ -6,15 +6,16 @@
 </p>
 
 <p align="center">
-  <a href="videos/ep1.mp4"><img src="docs/episodios/ep1.gif" width="240" alt="Episodio 1"></a>
+  <a href="https://fetnelio.github.io/isla-de-los-gatos/#ep1"><img src="docs/episodios/ep1.gif" width="240" alt="Episodio 1"></a>
   &nbsp;
-  <a href="videos/ep2.mp4"><img src="docs/episodios/ep2.gif" width="240" alt="Episodio 2"></a>
+  <a href="https://fetnelio.github.io/isla-de-los-gatos/#ep2"><img src="docs/episodios/ep2.gif" width="240" alt="Episodio 2"></a>
   &nbsp;
-  <a href="videos/ep3.mp4"><img src="docs/episodios/ep3.gif" width="240" alt="Episodio 3"></a>
+  <a href="https://fetnelio.github.io/isla-de-los-gatos/#ep3"><img src="docs/episodios/ep3.gif" width="240" alt="Episodio 3"></a>
 </p>
 
 <p align="center">
-  <sub>Vista previa acelerada · tocá cada una para ver el video completo con sonido.<br>
+  <b>▶ <a href="https://fetnelio.github.io/isla-de-los-gatos/">Ver los videos con sonido</a></b><br>
+  <sub>Vista previa acelerada · tocá cada una para ir al video completo.<br>
   Ep. 1 ★★ encierro en una línea · Ep. 2 ★★★★ encierro doble · Ep. 3 ★★★★★ contradicción</sub>
 </p>
 
@@ -194,8 +195,7 @@ render/              index.html (animación), grabar.js (MP4), cuadros.js (PNG s
 hacer_video.sh       todo el circuito en un comando
 backtracking.py      fuerza bruta, solo para verificar unicidad
 episodios/           tableros publicados
-videos/              episodios renderizados
-docs/                imágenes y GIFs de este README
+docs/                sitio de GitHub Pages: index.html, videos/, GIFs e imágenes de tácticas
 calibracion/         comparación con niveles de LinkedIn y comunitarios
 tableros/            tableros transcriptos de partidas reales
 ```

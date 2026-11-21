@@ -96,7 +96,7 @@ def tacticas():
 def gifs():
     os.makedirs(os.path.join(DOCS, "episodios"), exist_ok=True)
     for e in (1, 2, 3):
-        src = os.path.join(RAIZ, "videos", f"ep{e}.mp4")
+        src = os.path.join(DOCS, "videos", f"ep{e}.mp4")
         out = os.path.join(DOCS, "episodios", f"ep{e}.gif")
         vf = ("setpts=PTS/1.6,fps=8,scale=270:-1:flags=lanczos,split[a][b];"
               "[a]palettegen=max_colors=64[p];[b][p]paletteuse=dither=bayer:bayer_scale=4")

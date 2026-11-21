@@ -12,14 +12,18 @@ b="salida/ep$n"
 python3 guion.py "$tab" --numero "$n" -o "$b.json" > /dev/null
 python3 voz.py "$b.json" > /dev/null
 python3 audio.py "$b.json" "$b.wav" > /dev/null
-node render/grabar.js "$b.json" "docs/videos/ep$n.mp4" "$b.wav" > /dev/null 2>&1
+node render/grabar.js "$b.json" "$b.mp4" "$b.wav" > /dev/null 2>&1
 
 # story (desafío)
 s="salida/ep${n}_story"
 python3 guion.py "$tab" --numero "$n" --story -o "$s.json" > /dev/null
 python3 voz.py "$s.json" > /dev/null
 python3 audio.py "$s.json" "$s.wav" > /dev/null
-node render/grabar.js "$s.json" "docs/stories/ep$n.mp4" "$s.wav" > /dev/null 2>&1
+node render/grabar.js "$s.json" "$s.mp4" "$s.wav" > /dev/null 2>&1
+
+# recién con los dos completos se mueven al sitio
+mv "$b.mp4" "docs/videos/ep$n.mp4"
+mv "$s.mp4" "docs/stories/ep$n.mp4"
 
 dur=$(python3 -c "import json;print(round(json.load(open('$b.json'))['duration']))")
 echo "ep$n listo (reel ${dur}s)"

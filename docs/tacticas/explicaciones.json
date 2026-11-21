@@ -1,0 +1,9 @@
+{
+ "1": "",
+ "2": "El gato de la isla roja solo puede estar en la fila 1. Así que la fila 1 es suya: el resto se tacha.",
+ "3": "Esté donde esté el gato de la isla turquesa, estas casillas quedan atacadas. Se tachan.",
+ "4": "La fila 6 y la fila 7 solo caben en la isla celeste y la isla azul. Esos lugares son suyos: lo demás se tacha.",
+ "5": "La isla azul, la isla violeta y la isla rosa solo caben en la fila 7, la fila 8 y la fila 9. Esos lugares son suyos: lo demás se tacha.",
+ "6": "Si va en E4, se fuerza un gato en G5... y la isla turquesa se queda sin lugar. ¡Imposible! Entonces E4 es X.",
+ "7": "Si va en I1, se fuerza un gato en F4... y la isla turquesa se queda sin lugar. ¡Imposible! Entonces I1 es X."
+}

@@ -163,7 +163,7 @@ function render(t) {
         if (i === a || X.has(i) || CAT.has(i) || tinted.has(i)) continue;
         if (r === ar || c === ac || G[r][c] === G[ar][ac] || (Math.abs(r - ar) <= 1 && Math.abs(c - ac) <= 1)) {
           tinted.add(i);
-          s += `<rect x="${x0 + c * cs + 4}" y="${y0 + r * cs + 4}" width="${cs - 8}" height="${cs - 8}" rx="${cs * 0.12}" fill="#FF6B6B" opacity="0.38"/>`;
+          s += `<rect x="${x0 + c * cs + 4}" y="${y0 + r * cs + 4}" width="${cs - 8}" height="${cs - 8}" rx="${cs * 0.12}" fill="#E63946" opacity="0.6"/>`;
         }
       }
     }
@@ -176,7 +176,7 @@ function render(t) {
       const a = 0.5 + 0.5 * Math.sin(t * 12);
       for (const i of (active.empty || [])) {
         const r = Math.floor(i / n), c = i % n;
-        s += `<rect x="${x0 + c * cs + 3}" y="${y0 + r * cs + 3}" width="${cs - 6}" height="${cs - 6}" rx="${cs * 0.12}" fill="#FF6B6B" opacity="${(0.45 * a).toFixed(3)}"/>`;
+        s += `<rect x="${x0 + c * cs + 3}" y="${y0 + r * cs + 3}" width="${cs - 6}" height="${cs - 6}" rx="${cs * 0.12}" fill="#E63946" opacity="${(0.25 + 0.3 * a).toFixed(3)}" stroke="#FF2E3D" stroke-width="8"/>`;
       }
     }
   }

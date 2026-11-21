@@ -6,8 +6,17 @@ Uso: python3 guion.py tablero.txt --numero 12 -o video.json
 """
 import json
 import random
+import re
 import sys
 from solver import solve, parse, NOMBRE_TACTICA
+
+# invitaciones a la acción del cierre (rotan por episodio)
+CTAS = [
+    "Si lo sacaste antes que yo, dejá un miau en los comentarios.",
+    "Mandáselo a quien siempre te gana en estos juegos.",
+    "Guardalo y probalo sin mirar la solución.",
+    "Mañana, otra isla. Seguime para no perdértela.",
+]
 
 # paleta propia (nombre para el relator, color)
 PALETA = [
@@ -150,7 +159,7 @@ def build(grid, numero=1, titulo="¿Dónde va cada gato?"):
             cadena = ", ".join(cname(c) for c in chain)
             exp = (f"Si va en {cname(h)}, se fuerza{'n' if len(chain) > 1 else ''} "
                    f"{'gatos' if len(chain) > 1 else 'un gato'} en {cadena}... "
-                   f"y {gname(s['empty'])} se queda sin lugar. ¡Imposible! [risa] Entonces {cname(h)} es X.")
+                   f"y {gname(s['empty'])} se queda sin lugar. ¡Imposible! [miau] Entonces {cname(h)} es X.")
             body = dict(hyp=h, chain=chain, empty=gcells(s["empty"]), focus=[h])
 
         if key:
@@ -167,14 +176,14 @@ def build(grid, numero=1, titulo="¿Dónde va cada gato?"):
         add(dur, kind="step", level=lvl, tag=tag, caption=caption, voz=voz,
             x=s["cells"], apply=dur * (0.8 if lvl >= 6 else 0.6), **body)
 
+    cta = CTAS[(numero - 1) % len(CTAS)]
     add(3.0, kind="outro", caption="Cada gato en su isla...\ny cada isla con su gato.",
-        sub="¿Qué paso te costó más? Contalo en comentarios.",
-        voz="Cada gato en su isla... y cada isla con su gato. [risa] ¿Qué paso te costó más? Contame en los comentarios.")
+        sub=cta, voz=f"Cada gato en su isla... y cada isla con su gato. [michi] {cta}")
 
     for b in beats:
         for k in ("caption", "sub"):
             if b.get(k):
-                b[k] = b[k].replace("[glitch] ", "").replace("[risa] ", "")
+                b[k] = re.sub(r"\[(glitch|risa|miau|michi)\] ?", "", b[k])
     return {
         "n": n, "grid": grid, "numero": numero,
         "colors": [PALETA[k][1] for k in range(n)],

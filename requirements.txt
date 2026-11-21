@@ -1,2 +1,3 @@
 numpy
-piper-tts
+kokoro-onnx
+piper-tts  # opcional

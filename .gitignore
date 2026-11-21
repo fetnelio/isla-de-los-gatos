@@ -3,3 +3,4 @@ salida/
 voces/*.onnx
 voces/*.onnx.json
 calibracion/datos/
+voces/*.bin

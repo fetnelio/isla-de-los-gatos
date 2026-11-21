@@ -1,9 +1,16 @@
 """
-Voz del relator (Piper TTS, natural) y re-timing del guion según la voz.
+Voz del relator y re-timing del guion según la voz.
 
-Marcas en el texto:  [risa] -> "¡Ja, ja, ja, ja!"   ([glitch] se ignora)
-Voz: variable de entorno VOZ (nombre del modelo en /home/user/voces), por defecto es_AR-daniela-high.
-Velocidad: variable VOZ_VEL (length_scale de Piper; <1 más rápido), por defecto 0.92.
+Motor: Kokoro (ONNX), voces en español: ef_dora (default), em_alex, em_santa.
+También acepta una voz Piper si VOZ empieza con "es_" (p.ej. es_MX-ald-medium).
+
+Marcas en el texto:
+  [miau]  -> "¡Miau, miau, miau, miáuuu!"   ([risa] es alias)
+  [michi] -> "Michi, michi, miau."
+  ([glitch] se ignora)
+
+Variables: VOZ (voz), VOZ_VEL (velocidad Kokoro; >1 más rápido; default 1.05),
+           VOCES_DIR (carpeta de modelos, default ./voces)
 
 Uso: python3 voz.py video.json   (escribe clips en <base>_voz/ y actualiza el json)
 """
@@ -14,46 +21,69 @@ import re
 import sys
 import wave
 import numpy as np
-from piper import PiperVoice, SynthesisConfig
 
 SR = 44100
 VOCES = os.environ.get("VOCES_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "voces"))
-MODELO = os.environ.get("VOZ", "es_AR-daniela-high")
-VEL = float(os.environ.get("VOZ_VEL", "0.92"))
-RISA = "¡Ja, ja, ja, ja!"
+MODELO = os.environ.get("VOZ", "ef_dora")
+VEL = float(os.environ.get("VOZ_VEL", "1.05"))
+MARCAS = {
+    "[miau]": "¡Miau, miau, miau, miáuuu!",
+    "[risa]": "¡Miau, miau, miau, miáuuu!",
+    "[michi]": "Michi, michi, miau.",
+}
 
-_voice = None
+_engine = None
 
 
-def tts(text, length_scale=None):
-    global _voice
-    if _voice is None:
-        _voice = PiperVoice.load(os.path.join(VOCES, MODELO + ".onnx"))
-    buf = io.BytesIO()
-    with wave.open(buf, "wb") as w:
-        _voice.synthesize_wav(text, w, SynthesisConfig(length_scale=length_scale or VEL))
-    buf.seek(0)
-    with wave.open(buf) as w:
-        sr = w.getframerate()
-        x = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
+def _resample(x, sr):
+    if sr == SR:
+        return x
     t_new = np.arange(int(len(x) * SR / sr)) / SR
-    x = np.interp(t_new, np.arange(len(x)) / sr, x)
+    return np.interp(t_new, np.arange(len(x)) / sr, x)
+
+
+def _trim(x):
     nz = np.where(np.abs(x) > 0.01)[0]
     return x[max(0, nz[0] - 200): nz[-1] + 2000] if len(nz) else x
 
 
+def tts(text, speed=None):
+    global _engine
+    speed = speed or VEL
+    if MODELO.startswith("es_"):  # Piper
+        from piper import PiperVoice, SynthesisConfig
+        if _engine is None:
+            _engine = PiperVoice.load(os.path.join(VOCES, MODELO + ".onnx"))
+        buf = io.BytesIO()
+        with wave.open(buf, "wb") as w:
+            _engine.synthesize_wav(text, w, SynthesisConfig(length_scale=1 / speed))
+        buf.seek(0)
+        with wave.open(buf) as w:
+            sr = w.getframerate()
+            x = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
+    else:  # Kokoro
+        from kokoro_onnx import Kokoro
+        if _engine is None:
+            _engine = Kokoro(os.path.join(VOCES, "kokoro-v1.0.onnx"), os.path.join(VOCES, "voices-v1.0.bin"))
+        x, sr = _engine.create(text, voice=MODELO, speed=speed, lang="es")
+        x = np.asarray(x, dtype=np.float32)
+    return _trim(_resample(x, sr))
+
+
 def say(text):
-    parts = re.split(r"(\[risa\])", text.replace("[glitch] ", "").replace("[glitch]", ""))
+    text = text.replace("[glitch] ", "").replace("[glitch]", "")
+    parts = re.split(r"(\[miau\]|\[risa\]|\[michi\])", text)
     out = []
     for p in parts:
         p = p.strip()
         if not p:
             continue
-        if p == "[risa]":
-            out += [np.zeros(int(0.12 * SR)), tts(RISA, VEL * 0.85), np.zeros(int(0.2 * SR))]
+        if p in MARCAS:
+            out += [np.zeros(int(0.12 * SR)), tts(MARCAS[p]), np.zeros(int(0.2 * SR))]
         else:
             out.append(tts(p))
-    return np.concatenate(out) if out else np.zeros(1)
+    x = np.concatenate(out) if out else np.zeros(1)
+    return x / (np.max(np.abs(x)) + 1e-9) * 0.9
 
 
 def write(path, x):

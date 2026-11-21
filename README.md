@@ -27,7 +27,7 @@ La dificultad de un tablero es la táctica más alta que necesita.
 - `solver.py`: solver explicador; aplica siempre la táctica más baja y registra la evidencia de cada paso.
 - `generador.py`: elige la solución, hace crecer las islas y hace búsqueda local hasta que el solver necesite exactamente el nivel pedido (con penalizaciones por islas deformes o desparejas).
 - `guion.py`: convierte los pasos en guion: intro, "pausá y probá", pregunta + explicación la primera vez que aparece cada táctica, frases cortas en las repeticiones, cascada final y latiguillo de cierre.
-- `voz.py`: voz del relator con [Piper](https://github.com/rhasspy/piper) (por defecto `es_AR-daniela-high`) y re-timing del guion según la voz.
+- `voz.py`: voz del relator con [Kokoro](https://github.com/thewh1teagle/kokoro-onnx) (por defecto `ef_dora`; también `em_alex`, `em_santa`, o voces Piper) y re-timing del guion según la voz. Marcas: `[miau]`, `[michi]`.
 - `audio.py`: música de fondo, notas por gato (escala ascendente en la cascada), tics por X, campanita en las preguntas, voz encima con ducking.
 - `render/index.html` + `render/grabar.js`: animación SVG y grabación cuadro a cuadro con Playwright + ffmpeg (MP4 1080×1920).
 - `backtracking.py`: solver por fuerza bruta, solo para verificar unicidad.
@@ -46,10 +46,16 @@ pip install -r requirements.txt     # además: ffmpeg, node + playwright
 ./hacer_video.sh episodios/ep3.txt 3
 
 # otra voz / velocidad
-VOZ=es_MX-claude-high VOZ_VEL=0.9 ./hacer_video.sh episodios/ep1.txt 1
+VOZ=em_alex VOZ_VEL=1.1 ./hacer_video.sh episodios/ep1.txt 1
 ```
 
 Formato de tablero: N líneas de N letras, cada letra es una isla.
+
+## Elección de voz
+
+Se midió la inteligibilidad transcribiendo con Whisper frases del guion
+(¿se entienden "isla" y "gato"?): Piper `es_AR-daniela` 4/15, otras voces Piper 9–12/15,
+**Kokoro (las 3 voces) 15/15**.
 
 ## Calibración (resumen)
 

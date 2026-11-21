@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Render puzzle gatos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg1: #16213B; --bg2: #24345A; --ink: #FFFFFF; --muted: #AFC0E0;
+    --accent: #FFD36E; --danger: #FF6B6B;
+  }
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; }
+  body {
+    background: radial-gradient(ellipse at 50% 30%, var(--bg2), var(--bg1) 70%);
+    font-family: Nunito, "DejaVu Sans", sans-serif; color: var(--ink);
+  }
+  #head { position: absolute; top: 110px; left: 0; right: 0; text-align: center; }
+  #brand { font-size: 34px; letter-spacing: 6px; color: var(--muted); font-weight: 800; }
+  #level { font-size: 92px; font-weight: 900; margin-top: 6px; }
+  #stars { font-size: 52px; color: var(--accent); letter-spacing: 8px; }
+  #tag {
+    position: absolute; top: 445px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #2A2340; font-weight: 900; font-size: 36px;
+    padding: 10px 30px; border-radius: 40px; white-space: nowrap; transition: none;
+  }
+  #board { position: absolute; top: 530px; left: 60px; }
+  #cap {
+    position: absolute; top: 1520px; left: 70px; right: 70px; text-align: center;
+    font-size: 54px; font-weight: 800; line-height: 1.2; white-space: pre-line;
+  }
+  #sub { margin-top: 18px; font-size: 40px; font-weight: 600; color: var(--muted); }
+</style>
+</head>
+<body>
+<div id="head"><div id="brand">LA ISLA DE LOS GATOS</div><div id="level"></div><div id="stars"></div></div>
+<div id="tag"></div>
+<svg id="board" width="960" height="960"></svg>
+<div id="cap"><div id="captext"></div><div id="sub"></div></div>
+<script>
+const COLS = "ABCDEFGHIJKL";
+let D = null;
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const ease = x => 1 - Math.pow(1 - clamp(x, 0, 1), 3);
+const pop = x => { x = clamp(x, 0, 1); return x < 0.6 ? ease(x / 0.6) * 1.15 : 1.15 - 0.15 * ease((x - 0.6) / 0.4); };
+
+function catSVG(cx, cy, s, opacity = 1) {
+  // gato propio: cabeza redonda, orejas, hocico claro, ojos
+  const k = s / 100;
+  return `<g transform="translate(${cx},${cy}) scale(${k})" opacity="${opacity}">
+    <path d="M-38,-18 L-34,-48 L-12,-30 Z M38,-18 L34,-48 L12,-30 Z" fill="#2B2B3A" stroke="#2B2B3A" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M-33,-24 L-31,-40 L-19,-30 Z M33,-24 L31,-40 L19,-30 Z" fill="#F4A3B4"/>
+    <ellipse cx="0" cy="2" rx="42" ry="36" fill="#2B2B3A"/>
+    <ellipse cx="0" cy="18" rx="24" ry="17" fill="#FFFFFF"/>
+    <circle cx="-15" cy="-4" r="8" fill="#FFFFFF"/><circle cx="15" cy="-4" r="8" fill="#FFFFFF"/>
+    <circle cx="-14" cy="-3" r="4.5" fill="#1B1B25"/><circle cx="16" cy="-3" r="4.5" fill="#1B1B25"/>
+    <path d="M-4,10 L4,10 L0,15 Z" fill="#F08AA0"/>
+    <path d="M0,15 Q-5,21 -10,18 M0,15 Q5,21 10,18" stroke="#1B1B25" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>`;
+}
+
+function render(t) {
+  const n = D.n, G = D.grid, L = 60, size = 960 - L, cs = size / n;
+  const beats = D.beats;
+  const active = beats.find(b => t >= b.t && t < b.t + b.d) || beats[beats.length - 1];
+  const age = t - active.t;
+
+  // estado del tablero
+  const X = new Map(), CAT = new Map();
+  for (const b of beats) {
+    if (b.apply === undefined) continue;
+    const at = b.t + b.apply;
+    if (t < at) continue;
+    for (const c of (b.x || [])) if (!X.has(c)) X.set(c, at);
+    for (const c of (b.swept || [])) if (!X.has(c)) X.set(c, at + 0.15);
+    if (b.cat !== undefined) CAT.set(b.cat, at);
+  }
+
+  const focus = new Set(active.focus || []), area = new Set(active.area || []);
+  const dimming = focus.size || area.size || active.hyp !== undefined;
+  let s = "";
+  const x0 = L, y0 = L;
+  // etiquetas
+  for (let i = 0; i < n; i++) {
+    s += `<text x="${x0 + i * cs + cs / 2}" y="${L - 18}" fill="#AFC0E0" font-size="30" font-weight="800" text-anchor="middle">${COLS[i]}</text>`;
+    s += `<text x="${L - 22}" y="${y0 + i * cs + cs / 2 + 11}" fill="#AFC0E0" font-size="30" font-weight="800" text-anchor="middle">${i + 1}</text>`;
+  }
+  // celdas
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+    const i = r * n + c, x = x0 + c * cs, y = y0 + r * cs;
+    s += `<rect x="${x + 2}" y="${y + 2}" width="${cs - 4}" height="${cs - 4}" rx="${cs * 0.14}" fill="${D.colors[G[r][c]]}"/>`;
+  }
+  // bordes de islas
+  let path = "";
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+    const x = x0 + c * cs, y = y0 + r * cs;
+    if (c + 1 < n && G[r][c] !== G[r][c + 1]) path += `M${x + cs},${y}V${y + cs}`;
+    if (r + 1 < n && G[r][c] !== G[r + 1][c]) path += `M${x},${y + cs}H${x + cs}`;
+  }
+  s += `<path d="${path}" stroke="#16213B" stroke-width="7" stroke-linecap="round"/>`;
+  s += `<rect x="${x0}" y="${y0}" width="${size}" height="${size}" rx="14" fill="none" stroke="#16213B" stroke-width="8"/>`;
+
+  // atenuar lo que no está en foco
+  const appliedAge = active.apply !== undefined ? age - active.apply : -1;
+  if (dimming && active.kind !== "outro" && !(active.hyp !== undefined && active.kind === "step")) {
+    const dimA = 0.55 * ease(age / 0.35) * (appliedAge > 0.6 ? clamp(1 - (appliedAge - 0.6) / 0.4, 0, 1) : 1);
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+      const i = r * n + c;
+      if (focus.has(i)) continue;
+      const a = area.has(i) ? dimA * 0.35 : dimA;
+      s += `<rect x="${x0 + c * cs}" y="${y0 + r * cs}" width="${cs}" height="${cs}" fill="#0B1020" opacity="${a.toFixed(3)}"/>`;
+    }
+  }
+  // X
+  for (const [c, at] of X) {
+    const r = Math.floor(c / n), cc = c % n, cx = x0 + cc * cs + cs / 2, cy = y0 + r * cs + cs / 2;
+    const k = ease((t - at) / 0.25), h = cs * 0.2 * k;
+    s += `<path d="M${cx - h},${cy - h}L${cx + h},${cy + h}M${cx + h},${cy - h}L${cx - h},${cy + h}" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="${cs * 0.09}" stroke-linecap="round"/>`;
+  }
+  // contorno del foco
+  if (focus.size && active.kind !== "outro") {
+    let fp = "";
+    for (const i of focus) {
+      const r = Math.floor(i / n), c = i % n, x = x0 + c * cs, y = y0 + r * cs;
+      const has = (rr, cc) => rr >= 0 && cc >= 0 && rr < n && cc < n && focus.has(rr * n + cc);
+      if (!has(r - 1, c)) fp += `M${x},${y}H${x + cs}`;
+      if (!has(r + 1, c)) fp += `M${x},${y + cs}H${x + cs}`;
+      if (!has(r, c - 1)) fp += `M${x},${y}V${y + cs}`;
+      if (!has(r, c + 1)) fp += `M${x + cs},${y}V${y + cs}`;
+    }
+    const pulse = 0.75 + 0.25 * Math.sin(t * 6);
+    s += `<path d="${fp}" stroke="#FFD36E" stroke-width="9" stroke-linecap="round" opacity="${pulse.toFixed(3)}"/>`;
+  }
+  // candidatas (anillos)
+  for (const i of (active.cands || [])) {
+    if (X.has(i) || CAT.has(i)) continue;
+    const r = Math.floor(i / n), c = i % n;
+    const rr = cs * 0.22 * (0.9 + 0.1 * Math.sin(t * 5));
+    s += `<circle cx="${x0 + c * cs + cs / 2}" cy="${y0 + r * cs + cs / 2}" r="${rr}" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-dasharray="8 7"/>`;
+  }
+  // casillas a tachar (antes de aplicar)
+  if (active.kind === "step" && appliedAge < 0) {
+    for (const i of (active.x || [])) {
+      const r = Math.floor(i / n), c = i % n;
+      const a = 0.5 + 0.5 * Math.sin(t * 10);
+      s += `<rect x="${x0 + c * cs + 5}" y="${y0 + r * cs + 5}" width="${cs - 10}" height="${cs - 10}" rx="${cs * 0.12}" fill="none" stroke="#FF6B6B" stroke-width="7" opacity="${a.toFixed(3)}"/>`;
+    }
+  }
+  // contradicción: gato fantasma + cadena + grupo vacío
+  if (active.hyp !== undefined && active.kind === "step" && appliedAge < 0) {
+    const ph = age / active.apply;
+    const cell = i => [x0 + (i % n) * cs + cs / 2, y0 + Math.floor(i / n) * cs + cs / 2];
+    const [hx, hy] = cell(active.hyp);
+    const ch = active.chain || [];
+    // casillas atacadas por el gato supuesto y por los forzados
+    const attackers = [[active.hyp, 0]].concat(ch.map((c, j) => [c, 0.2 + 0.35 * (j / Math.max(1, ch.length))]));
+    const tinted = new Set();
+    for (const [a, st] of attackers) {
+      if (ph < st) continue;
+      const ar = Math.floor(a / n), ac = a % n;
+      for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+        const i = r * n + c;
+        if (i === a || X.has(i) || CAT.has(i) || tinted.has(i)) continue;
+        if (r === ar || c === ac || G[r][c] === G[ar][ac] || (Math.abs(r - ar) <= 1 && Math.abs(c - ac) <= 1)) {
+          tinted.add(i);
+          s += `<rect x="${x0 + c * cs + 4}" y="${y0 + r * cs + 4}" width="${cs - 8}" height="${cs - 8}" rx="${cs * 0.12}" fill="#FF6B6B" opacity="0.38"/>`;
+        }
+      }
+    }
+    s += catSVG(hx, hy, cs * 0.8 * pop(ph / 0.15), 0.6);
+    ch.forEach((c, j) => {
+      const st = 0.2 + 0.35 * (j / Math.max(1, ch.length));
+      if (ph > st) { const [cx, cy] = cell(c); s += catSVG(cx, cy, cs * 0.8 * pop((ph - st) / 0.12), 0.6); }
+    });
+    if (ph > 0.6) {
+      const a = 0.5 + 0.5 * Math.sin(t * 12);
+      for (const i of (active.empty || [])) {
+        const r = Math.floor(i / n), c = i % n;
+        s += `<rect x="${x0 + c * cs + 3}" y="${y0 + r * cs + 3}" width="${cs - 6}" height="${cs - 6}" rx="${cs * 0.12}" fill="#FF6B6B" opacity="${(0.45 * a).toFixed(3)}"/>`;
+      }
+    }
+  }
+  // gatos
+  for (const [c, at] of CAT) {
+    const r = Math.floor(c / n), cc = c % n;
+    s += catSVG(x0 + cc * cs + cs / 2, y0 + r * cs + cs / 2, cs * 0.82 * pop((t - at) / 0.35));
+  }
+  document.getElementById("board").innerHTML = s;
+
+  // textos
+  document.getElementById("level").textContent = `Nivel ${D.numero}`;
+  document.getElementById("stars").textContent = "★".repeat(D.stars) + "☆".repeat(5 - D.stars);
+  const tag = document.getElementById("tag");
+  tag.textContent = active.tag || "";
+  tag.style.opacity = active.tag ? 1 : 0;
+  const cap = document.getElementById("cap");
+  cap.style.opacity = ease(age / 0.3).toFixed(3);
+  document.getElementById("captext").textContent = active.caption || "";
+  document.getElementById("sub").textContent = active.sub || "";
+  if (active.kind === "step" && active.tag === "Cascada") {
+    const say = beats.filter(b => b.kind === "say" && b.t <= t).pop();
+    document.getElementById("captext").textContent = say ? say.caption : "";
+    document.getElementById("sub").textContent = "";
+    cap.style.opacity = 1;
+  }
+}
+
+window.load = data => { D = data; render(0); };
+window.render = render;
+// vista previa en el navegador: ?json=archivo.json
+const q = new URLSearchParams(location.search).get("json");
+if (q) fetch(q).then(r => r.json()).then(d => {
+  window.load(d); const t0 = performance.now();
+  const loop = () => { const t = (performance.now() - t0) / 1000; render(t % D.duration); requestAnimationFrame(loop); };
+  loop();
+});
+</script>
+</body>
+</html>

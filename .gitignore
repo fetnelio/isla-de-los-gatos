@@ -1,0 +1,5 @@
+__pycache__/
+salida/
+voces/*.onnx
+voces/*.onnx.json
+calibracion/datos/

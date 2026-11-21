@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Episodios · La Isla de los Gatos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root { --bg1:#16213B; --bg2:#24345A; --card:#1D2B4A; --ink:#FFF; --muted:#AFC0E0; --accent:#FFD36E; --line:#2E4170; --warn:#FF8A80; }
+  * { box-sizing: border-box; }
+  body { margin:0; color:var(--ink); font-family:Nunito,system-ui,sans-serif; line-height:1.45;
+         background: radial-gradient(ellipse at 50% 0%, var(--bg2), var(--bg1) 60%) fixed, var(--bg1); }
+  main { max-width:1200px; margin:0 auto; padding:40px 16px 80px; }
+  .top { text-align:center; margin-bottom:32px; }
+  .marca { letter-spacing:.35em; color:var(--muted); font-weight:800; font-size:14px; }
+  h1 { font-size:clamp(32px,6vw,52px); font-weight:900; margin:6px 0; }
+  .top p { color:var(--muted); margin:0; }
+  .top a { color:var(--accent); }
+  .grilla { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:20px; }
+  .ep { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px; scroll-margin-top:16px; }
+  .ep:target { outline:3px solid var(--accent); }
+  .ep header { display:flex; justify-content:space-between; align-items:baseline; }
+  .ep h2 { margin:0; font-size:22px; font-weight:900; }
+  .fecha { color:var(--accent); font-weight:800; }
+  .meta { margin:4px 0 12px; color:var(--muted); font-size:15px; }
+  .estrellas { color:var(--accent); letter-spacing:1px; }
+  .videos { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  figure { margin:0; }
+  video { width:100%; aspect-ratio:9/16; border-radius:10px; background:#0B1020; display:block; }
+  figcaption { font-size:13px; color:var(--muted); margin-top:6px; }
+  figcaption a { color:var(--accent); }
+  .aviso { color:var(--warn); font-weight:800; }
+  details { margin-top:12px; }
+  summary { cursor:pointer; font-weight:800; color:var(--muted); }
+  pre { white-space:pre-wrap; background:#121B33; border-radius:10px; padding:12px; font:14px/1.4 Nunito,system-ui,sans-serif; color:var(--ink); }
+  button { background:var(--accent); color:#2A2340; border:0; border-radius:20px; padding:8px 16px; font:800 14px Nunito,system-ui,sans-serif; cursor:pointer; }
+  @media (max-width:420px) { .grilla { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <div class="marca">LA ISLA DE LOS GATOS</div>
+    <h1>Todos los episodios</h1>
+    <p>33 episodios · reel (solución) + story (desafío) · <a href="./">volver al inicio</a></p>
+  </div>
+  <section class="grilla">
+    <article class="ep" id="ep1">
+      <header><h2>Ep. 1</h2><span class="fecha">Piloto</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 7x7 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep1.mp4" poster="galeria/ep1_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 36 s · <a href="videos/ep1.mp4" download>descargar</a></figcaption></figure>
+      </div>
+    </article>
+    <article class="ep" id="ep2">
+      <header><h2>Ep. 2</h2><span class="fecha">Piloto</span></header>
+      <p class="meta"><span class="estrellas">★★★★</span> · 8x8 · Encierro doble</p>
+      <div class="videos">
+        <figure><video src="videos/ep2.mp4" poster="galeria/ep2_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 45 s · <a href="videos/ep2.mp4" download>descargar</a></figcaption></figure>
+      </div>
+    </article>
+    <article class="ep" id="ep3">
+      <header><h2>Ep. 3</h2><span class="fecha">Piloto</span></header>
+      <p class="meta"><span class="estrellas">★★★★★</span> · 9x9 · ¿Y si...? (contradicción)</p>
+      <div class="videos">
+        <figure><video src="videos/ep3.mp4" poster="galeria/ep3_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 76 s <span class="aviso">largo</span> · <a href="videos/ep3.mp4" download>descargar</a></figcaption></figure>
+      </div>
+    </article>
+    <article class="ep" id="ep4">
+      <header><h2>Ep. 4</h2><span class="fecha">dom 22/11</span></header>
+      <p class="meta"><span class="estrellas">★★★★</span> · 8x8 · Encierro doble</p>
+      <div class="videos">
+        <figure><video src="videos/ep4.mp4" poster="galeria/ep4_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 50 s · <a href="videos/ep4.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep4.mp4" poster="galeria/ep4.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep4.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t4">Nivel 4 ★★★★☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro doble.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t4">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep5">
+      <header><h2>Ep. 5</h2><span class="fecha">lun 23/11</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 7x7 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep5.mp4" poster="galeria/ep5_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 36 s · <a href="videos/ep5.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep5.mp4" poster="galeria/ep5.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep5.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t5">Nivel 5 ★★☆☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro en una línea.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t5">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep6">
+      <header><h2>Ep. 6</h2><span class="fecha">mar 24/11</span></header>
+      <p class="meta"><span class="estrellas">★★★</span> · 8x8 · Ataque común</p>
+      <div class="videos">
+        <figure><video src="videos/ep6.mp4" poster="galeria/ep6_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 46 s · <a href="videos/ep6.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep6.mp4" poster="galeria/ep6.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep6.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t6">Nivel 6 ★★★☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Ataque común.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t6">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep7">
+      <header><h2>Ep. 7</h2><span class="fecha">mié 25/11</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 8x8 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep7.mp4" poster="galeria/ep7_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 36 s · <a href="videos/ep7.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep7.mp4" poster="galeria/ep7.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep7.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t7">Nivel 7 ★★☆☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro en una línea.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t7">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep8">
+      <header><h2>Ep. 8</h2><span class="fecha">jue 26/11</span></header>
+      <p class="meta"><span class="estrellas">★★★</span> · 8x8 · Ataque común</p>
+      <div class="videos">
+        <figure><video src="videos/ep8.mp4" poster="galeria/ep8_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 49 s · <a href="videos/ep8.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep8.mp4" poster="galeria/ep8.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep8.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t8">Nivel 8 ★★★☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Ataque común.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t8">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep9">
+      <header><h2>Ep. 9</h2><span class="fecha">vie 27/11</span></header>
+      <p class="meta"><span class="estrellas">★★★★</span> · 8x8 · Encierro doble</p>
+      <div class="videos">
+        <figure><video src="videos/ep9.mp4" poster="galeria/ep9_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 52 s · <a href="videos/ep9.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep9.mp4" poster="galeria/ep9.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep9.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t9">Nivel 9 ★★★★☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro doble.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t9">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep10">
+      <header><h2>Ep. 10</h2><span class="fecha">sáb 28/11</span></header>
+      <p class="meta"><span class="estrellas">★★★★★</span> · 9x9 · ¿Y si...? (contradicción)</p>
+      <div class="videos">
+        <figure><video src="videos/ep10.mp4" poster="galeria/ep10_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 88 s <span class="aviso">largo</span> · <a href="videos/ep10.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep10.mp4" poster="galeria/ep10.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep10.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t10">Nivel 10 ★★★★★ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: ¿Y si...? (contradicción).
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t10">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep11">
+      <header><h2>Ep. 11</h2><span class="fecha">dom 29/11</span></header>
+      <p class="meta"><span class="estrellas">★★★★</span> · 9x9 · Encierro doble</p>
+      <div class="videos">
+        <figure><video src="videos/ep11.mp4" poster="galeria/ep11_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 62 s <span class="aviso">largo</span> · <a href="videos/ep11.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep11.mp4" poster="galeria/ep11.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep11.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t11">Nivel 11 ★★★★☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro doble.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t11">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep12">
+      <header><h2>Ep. 12</h2><span class="fecha">lun 30/11</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 7x7 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep12.mp4" poster="galeria/ep12_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 33 s · <a href="videos/ep12.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep12.mp4" poster="galeria/ep12.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep12.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t12">Nivel 12 ★★☆☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro en una línea.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t12">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep13">
+      <header><h2>Ep. 13</h2><span class="fecha">mar 1/12</span></header>
+      <p class="meta"><span class="estrellas">★★★</span> · 8x8 · Ataque común</p>
+      <div class="videos">
+        <figure><video src="videos/ep13.mp4" poster="galeria/ep13_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 50 s · <a href="videos/ep13.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep13.mp4" poster="galeria/ep13.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep13.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t13">Nivel 13 ★★★☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Ataque común.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t13">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep14">
+      <header><h2>Ep. 14</h2><span class="fecha">mié 2/12</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 8x8 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep14.mp4" poster="galeria/ep14_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 37 s · <a href="videos/ep14.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep14.mp4" poster="galeria/ep14.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep14.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t14">Nivel 14 ★★☆☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro en una línea.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t14">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep15">
+      <header><h2>Ep. 15</h2><span class="fecha">jue 3/12</span></header>
+      <p class="meta"><span class="estrellas">★★★</span> · 8x8 · Ataque común</p>
+      <div class="videos">
+        <figure><video src="videos/ep15.mp4" poster="galeria/ep15_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 46 s · <a href="videos/ep15.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep15.mp4" poster="galeria/ep15.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep15.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t15">Nivel 15 ★★★☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Ataque común.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t15">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep16">
+      <header><h2>Ep. 16</h2><span class="fecha">vie 4/12</span></header>
+      <p class="meta"><span class="estrellas">★★★★</span> · 8x8 · Encierro doble</p>
+      <div class="videos">
+        <figure><video src="videos/ep16.mp4" poster="galeria/ep16_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 62 s <span class="aviso">largo</span> · <a href="videos/ep16.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep16.mp4" poster="galeria/ep16.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep16.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t16">Nivel 16 ★★★★☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro doble.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t16">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep17">
+      <header><h2>Ep. 17</h2><span class="fecha">sáb 5/12</span></header>
+      <p class="meta"><span class="estrellas">★★★★★</span> · 9x9 · ¿Y si...? (contradicción)</p>
+      <div class="videos">
+        <figure><video src="videos/ep17.mp4" poster="galeria/ep17_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 92 s <span class="aviso">largo</span> · <a href="videos/ep17.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep17.mp4" poster="galeria/ep17.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep17.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t17">Nivel 17 ★★★★★ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: ¿Y si...? (contradicción).
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t17">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep18">
+      <header><h2>Ep. 18</h2><span class="fecha">dom 6/12</span></header>
+      <p class="meta"><span class="estrellas">★★★★</span> · 9x9 · Encierro doble</p>
+      <div class="videos">
+        <figure><video src="videos/ep18.mp4" poster="galeria/ep18_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 62 s <span class="aviso">largo</span> · <a href="videos/ep18.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep18.mp4" poster="galeria/ep18.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep18.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t18">Nivel 18 ★★★★☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro doble.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t18">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep19">
+      <header><h2>Ep. 19</h2><span class="fecha">lun 7/12</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 7x7 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep19.mp4" poster="galeria/ep19_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 32 s · <a href="videos/ep19.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep19.mp4" poster="galeria/ep19.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep19.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t19">Nivel 19 ★★☆☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro en una línea.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t19">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep20">
+      <header><h2>Ep. 20</h2><span class="fecha">mar 8/12</span></header>
+      <p class="meta"><span class="estrellas">★★★</span> · 8x8 · Ataque común</p>
+      <div class="videos">
+        <figure><video src="videos/ep20.mp4" poster="galeria/ep20_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 49 s · <a href="videos/ep20.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep20.mp4" poster="galeria/ep20.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep20.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t20">Nivel 20 ★★★☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Ataque común.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t20">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep21">
+      <header><h2>Ep. 21</h2><span class="fecha">mié 9/12</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 8x8 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep21.mp4" poster="galeria/ep21_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 36 s · <a href="videos/ep21.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep21.mp4" poster="galeria/ep21.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep21.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t21">Nivel 21 ★★☆☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro en una línea.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t21">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep22">
+      <header><h2>Ep. 22</h2><span class="fecha">jue 10/12</span></header>
+      <p class="meta"><span class="estrellas">★★★</span> · 8x8 · Ataque común</p>
+      <div class="videos">
+        <figure><video src="videos/ep22.mp4" poster="galeria/ep22_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 51 s · <a href="videos/ep22.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep22.mp4" poster="galeria/ep22.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep22.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t22">Nivel 22 ★★★☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Ataque común.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t22">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep23">
+      <header><h2>Ep. 23</h2><span class="fecha">vie 11/12</span></header>
+      <p class="meta"><span class="estrellas">★★★★</span> · 8x8 · Encierro doble</p>
+      <div class="videos">
+        <figure><video src="videos/ep23.mp4" poster="galeria/ep23_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 60 s · <a href="videos/ep23.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep23.mp4" poster="galeria/ep23.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep23.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t23">Nivel 23 ★★★★☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro doble.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t23">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep24">
+      <header><h2>Ep. 24</h2><span class="fecha">sáb 12/12</span></header>
+      <p class="meta"><span class="estrellas">★★★★★</span> · 9x9 · ¿Y si...? (contradicción)</p>
+      <div class="videos">
+        <figure><video src="videos/ep24.mp4" poster="galeria/ep24_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 76 s <span class="aviso">largo</span> · <a href="videos/ep24.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep24.mp4" poster="galeria/ep24.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep24.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t24">Nivel 24 ★★★★★ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: ¿Y si...? (contradicción).
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t24">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep25">
+      <header><h2>Ep. 25</h2><span class="fecha">dom 13/12</span></header>
+      <p class="meta"><span class="estrellas">★★★</span> · 7x7 · Ataque común</p>
+      <div class="videos">
+        <figure><video src="videos/ep25.mp4" poster="galeria/ep25_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 46 s · <a href="videos/ep25.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep25.mp4" poster="galeria/ep25.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep25.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t25">Nivel 25 ★★★☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Ataque común.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t25">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep26">
+      <header><h2>Ep. 26</h2><span class="fecha">lun 14/12</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 7x7 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep26.mp4" poster="galeria/ep26_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 36 s · <a href="videos/ep26.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep26.mp4" poster="galeria/ep26.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep26.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t26">Nivel 26 ★★☆☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro en una línea.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t26">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep27">
+      <header><h2>Ep. 27</h2><span class="fecha">mar 15/12</span></header>
+      <p class="meta"><span class="estrellas">★★★</span> · 8x8 · Ataque común</p>
+      <div class="videos">
+        <figure><video src="videos/ep27.mp4" poster="galeria/ep27_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 49 s · <a href="videos/ep27.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep27.mp4" poster="galeria/ep27.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep27.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t27">Nivel 27 ★★★☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Ataque común.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t27">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep28">
+      <header><h2>Ep. 28</h2><span class="fecha">mié 16/12</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 8x8 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep28.mp4" poster="galeria/ep28_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 36 s · <a href="videos/ep28.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep28.mp4" poster="galeria/ep28.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep28.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t28">Nivel 28 ★★☆☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro en una línea.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t28">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep29">
+      <header><h2>Ep. 29</h2><span class="fecha">jue 17/12</span></header>
+      <p class="meta"><span class="estrellas">★★★</span> · 8x8 · Ataque común</p>
+      <div class="videos">
+        <figure><video src="videos/ep29.mp4" poster="galeria/ep29_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 55 s · <a href="videos/ep29.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep29.mp4" poster="galeria/ep29.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep29.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t29">Nivel 29 ★★★☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Ataque común.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t29">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep30">
+      <header><h2>Ep. 30</h2><span class="fecha">vie 18/12</span></header>
+      <p class="meta"><span class="estrellas">★★★★</span> · 8x8 · Encierro doble</p>
+      <div class="videos">
+        <figure><video src="videos/ep30.mp4" poster="galeria/ep30_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 62 s <span class="aviso">largo</span> · <a href="videos/ep30.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep30.mp4" poster="galeria/ep30.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep30.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t30">Nivel 30 ★★★★☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro doble.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t30">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep31">
+      <header><h2>Ep. 31</h2><span class="fecha">sáb 19/12</span></header>
+      <p class="meta"><span class="estrellas">★★★★★</span> · 9x9 · ¿Y si...? (contradicción)</p>
+      <div class="videos">
+        <figure><video src="videos/ep31.mp4" poster="galeria/ep31_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 92 s <span class="aviso">largo</span> · <a href="videos/ep31.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep31.mp4" poster="galeria/ep31.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep31.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t31">Nivel 31 ★★★★★ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: ¿Y si...? (contradicción).
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t31">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep32">
+      <header><h2>Ep. 32</h2><span class="fecha">dom 20/12</span></header>
+      <p class="meta"><span class="estrellas">★★★★★</span> · 9x9 · ¿Y si...? (contradicción)</p>
+      <div class="videos">
+        <figure><video src="videos/ep32.mp4" poster="galeria/ep32_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 103 s <span class="aviso">largo</span> · <a href="videos/ep32.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep32.mp4" poster="galeria/ep32.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep32.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t32">Nivel 32 ★★★★★ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: ¿Y si...? (contradicción).
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t32">Copiar texto</button></details>
+    </article>
+    <article class="ep" id="ep33">
+      <header><h2>Ep. 33</h2><span class="fecha">lun 21/12</span></header>
+      <p class="meta"><span class="estrellas">★★</span> · 7x7 · Encierro en una línea</p>
+      <div class="videos">
+        <figure><video src="videos/ep33.mp4" poster="galeria/ep33_reel.jpg" controls playsinline preload="none"></video>
+          <figcaption>Reel · 36 s · <a href="videos/ep33.mp4" download>descargar</a></figcaption></figure>
+        <figure><video src="stories/ep33.mp4" poster="galeria/ep33.jpg" controls playsinline preload="none"></video>
+          <figcaption>Story · 10 s · <a href="stories/ep33.mp4" download>descargar</a></figcaption></figure>
+      </div>
+      <details><summary>Texto para el reel</summary>
+        <pre id="t33">Nivel 33 ★★☆☆☆ · ¿Dónde va cada gato?
+Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal.
+La clave de hoy: Encierro en una línea.
+Pausá y probá antes de ver la solución.
+
+#acertijo #logica #puzzle #juegosdelogica #starbattle #queens #gatos #michis #desafio</pre>
+        <button type="button" data-copy="t33">Copiar texto</button></details>
+    </article>
+  </section>
+</main>
+<script>
+  // un solo video sonando a la vez
+  document.addEventListener("play", e => {
+    document.querySelectorAll("video").forEach(v => { if (v !== e.target) v.pause(); });
+  }, true);
+  document.querySelectorAll("button[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    const t = document.getElementById(b.dataset.copy).textContent;
+    try { await navigator.clipboard.writeText(t); b.textContent = "¡Copiado!"; }
+    catch (e) { b.textContent = "Seleccioná y copiá a mano"; }
+    setTimeout(() => b.textContent = "Copiar texto", 1800);
+  }));
+</script>
+</body>
+</html>

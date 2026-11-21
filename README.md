@@ -179,9 +179,29 @@ pip install -r requirements.txt      # además: ffmpeg, node + playwright
 # otra voz o velocidad
 VOZ=em_alex VOZ_VEL=1.1 ./hacer_video.sh episodios/ep1.txt 1
 
+# lote diario: calendario + tableros + textos (inicio, cantidad, primer episodio)
+python3 lote.py 2026-11-22 30 4
+xargs -P 3 -n 1 ./render_episodio.sh < lote/pendientes.txt   # reel + story por episodio
+
 # regenerar las imágenes y GIFs de este README
 python3 docs/generar_docs.py
 ```
+
+## Publicación diaria
+
+Cada día lleva una **story** (desafío de 10 s: "¿Podés resolverlo? La solución, hoy en el reel")
+y un **reel** con la solución completa. El calendario con fechas y textos listos para copiar
+está en [`lote/calendario.md`](lote/calendario.md).
+
+| Día | Tablero | Táctica clave | Dificultad |
+|---|---|---|---|
+| Lunes | 7×7 | Encierro en una línea | ★★ |
+| Martes | 8×8 | Ataque común | ★★★ |
+| Miércoles | 8×8 | Encierro en una línea | ★★ |
+| Jueves | 8×8 | Ataque común | ★★★ |
+| Viernes | 8×8 | Encierro doble | ★★★★ |
+| Sábado | 9×9 | Contradicción | ★★★★★ |
+| Domingo | sorteado | sorteada | sorpresa |
 
 ## Estructura
 
@@ -193,9 +213,12 @@ voz.py               Kokoro / Piper + re-timing   (marcas: [miau], [michi])
 audio.py             música, notas, ticks, mezcla con la voz
 render/              index.html (animación), grabar.js (MP4), cuadros.js (PNG sueltos)
 hacer_video.sh       todo el circuito en un comando
+lote.py              calendario de episodios diarios + textos para publicar
+render_episodio.sh   reel + story de un episodio
 backtracking.py      fuerza bruta, solo para verificar unicidad
 episodios/           tableros publicados
-docs/                sitio de GitHub Pages: index.html, videos/, GIFs e imágenes de tácticas
+docs/                sitio de GitHub Pages: index.html, videos/ (reels), stories/, GIFs, tácticas
+lote/                calendario.csv / calendario.md con fechas y textos
 calibracion/         comparación con niveles de LinkedIn y comunitarios
 tableros/            tableros transcriptos de partidas reales
 ```

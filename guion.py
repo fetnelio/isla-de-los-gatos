@@ -192,6 +192,24 @@ def build(grid, numero=1, titulo="¿Dónde va cada gato?"):
     }
 
 
+def build_story(grid, numero=1):
+    """Story de desafío (~10 s): tablero vacío, reglas y '¿podés resolverlo?'."""
+    res = solve(grid)
+    beats = [
+        {"t": 0, "d": 4.5, "kind": "intro", "caption": "Desafío del día",
+         "sub": "1 gato por fila, columna e isla. Los gatos no se tocan, ni en diagonal.",
+         "voz": "Desafío del día. Un gato por fila, por columna y por isla. Y no se tocan, ni en diagonal."},
+        {"t": 4.5, "d": 4.5, "kind": "pause", "caption": "¿Podés resolverlo?",
+         "sub": "La solución, hoy en el reel.", "tag": "Desafío",
+         "voz": "¿Podés resolverlo? La solución, hoy en el reel.", "pad": 1.2},
+    ]
+    n = len(grid)
+    return {"n": n, "grid": grid, "numero": numero,
+            "colors": [PALETA[k][1] for k in range(n)],
+            "stars": ESTRELLAS[res["maxlevel"]], "maxlevel": res["maxlevel"],
+            "duration": 9.0, "beats": beats}
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
     out = "video.json"
@@ -201,6 +219,6 @@ if __name__ == "__main__":
     if "--numero" in args:
         numero = int(args[args.index("--numero") + 1])
     grid = parse(open(args[0]).read())
-    data = build(grid, numero)
+    data = build_story(grid, numero) if "--story" in args else build(grid, numero)
     json.dump(data, open(out, "w"), ensure_ascii=False, indent=1)
     print(f"{out}: {len(data['beats'])} beats, {data['duration']:.1f}s, nivel máx {data['maxlevel']}")
